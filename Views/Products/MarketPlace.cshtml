@@ -14,8 +14,8 @@
             <div class="card">
                     <img class="card-img-top" src="@Url.Action("GetImage", new { id = item.ProductId })" alt="Product Image"/>
                 <div class="card-body">
-                    <h6 class="card-title">@item.Price</h6>
-                    <p class="card-text">@item.Description</p>
+                    <h6 class="card-title"> @Html.DisplayFor(modelItem => item.Price)</h6>
+                    <p id="itemDescription" class="card-text">@item.Description</p>
                     <a href="#" class="btn btn-outline-primary btn-sm">Add to Cart</a>
                 </div>
             </div>
@@ -24,3 +24,26 @@
 }
         </div>
     </div>
+
+
+<script>
+       // Function to truncate description
+    function truncateDescription() {
+        // Get the description element
+        const descriptionElement = document.getElementById("itemDescription");
+        
+        // Get the current text content
+        const descriptionText = descriptionElement.textContent;
+        
+        // Check if the description has more than 40 characters
+        if (descriptionText.length > 40) {
+            // Truncate the description and add "..."
+            const truncatedText = descriptionText.substring(0, 40) + "...";
+            // Update the element's text content
+            descriptionElement.textContent = truncatedText;
+        }
+    }
+
+    // Call the function on page load
+    truncateDescription(); 
+</script>
