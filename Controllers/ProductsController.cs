@@ -179,9 +179,21 @@ namespace MySoko.Models
         }
 
         //GET /MarketPlace
-        public async Task<IActionResult> MarketPlace()
+        public async Task<IActionResult> MarketPlace(string searchString)
         {
-            return View(await _context.Product.ToListAsync());
+            if (_context.Product == null)
+            {
+                return NotFound();
+            }
+            var products = from m in _context.Product
+                           select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.Description.ToUpper().Contains(searchString.ToUpper()));
+            }
+
+            return View(await products.ToListAsync());
         }
     }
 }
