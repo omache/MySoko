@@ -1,0 +1,65 @@
+html {
+  font-size: 14px;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.card {
+  margin: 10px 0;
+  background-color: darkgray;
+  border-radius: 10px;
+}
+
+.btn-outline-primary {
+  text-align: center;
+}
+
+.col-md-2 {
+  padding: 5px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-img-top {
+  width: 100%;
+  background-color: #258cfb;
+}
+
+.card-body {
+  text-align: left;
+  padding: 10px;
+  background-color: bisque;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-title,
+.card-text {
+  margin-bottom: 5px;
+  font-size: smaller;
+}
+
+.btn {
+  margin-top: 5px;
+}
