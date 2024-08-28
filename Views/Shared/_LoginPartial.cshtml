@@ -10,7 +10,8 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello
+            <a class="nav-link btn btn-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index"
+                title="Manage">Hello
                 @User.Identity?.Name!</a>
         </li>
         <li class="nav-item">
@@ -20,7 +21,7 @@
             </form>
         </li>
         <li class="nav-item">
-            <img src="@Url.Content("~/img/nopfp.png")" alt="Profile Picture" width="50" height="50" />
+            <img src="@Url.Content("~/img/nopfp.png")" class="" alt="Profile Picture" width="50" height="50" />
         </li>
     }
     else

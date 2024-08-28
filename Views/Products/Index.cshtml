@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Add Products</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-outline-info">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -27,7 +27,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.StockQuantity)
             </th>
-            <th></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
