@@ -48,26 +48,26 @@
 
 <script>
 let cart = [];
-function addToCart(productName, price) {
+function addToCart(productId, price) {
     const existingItem = cart.find(item => item.product === productName);
     if (existingItem) {
         existingItem.quantity += 1;
         existingItem.total = existingItem.quantity * existingItem.price;
         } 
         else {
-            cart.push({ product: productName, quantity: 1, price: price, total: price });
+            cart.push({ product: productId, quantity: 1, price: price, total: price });
             }
             renderCart();
         }
         
-function removeFromCart(productName) {
-    const item = cart.find(item => item.product === productName);
+function removeFromCart(productId) {
+    const item = cart.find(item => item.product === productId);
     if (item) {
                 if (item.quantity > 1) {
                     item.quantity -= 1;
                     item.total = item.quantity * item.price;
                 } else {
-                    cart = cart.filter(item => item.product !== productName);
+                    cart = cart.filter(item => item.product !== productId);
                 }
             }
 
