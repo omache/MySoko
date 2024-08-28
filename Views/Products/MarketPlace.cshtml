@@ -4,8 +4,19 @@
     ViewData["Title"] = "Market Place";
 }
 
+
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        
+        <form asp-controller="Products" asp-action="Index" class="d-flex">
+            <input type="text" name="searchString" class="form-control border-1 border-secondary me-2"
+                placeholder="Search Product" />
+            <input type="submit" value="Search" class="btn btn-outline-secondary" />
+        </form>
+        <i class="fa-solid fa-cart-shopping fa-3x float-end"></i>
+    </div>
+
 <div class="container">
-    <div class="row">
+<div class="row">
 @foreach (var item in Model)
 {
 
@@ -22,28 +33,8 @@
         </div>
 
 }
-        </div>
+ </div>
     </div>
 
 
-<script>
-       // Function to truncate description
-    function truncateDescription() {
-        // Get the description element
-        const descriptionElement = document.getElementById("itemDescription");
-        
-        // Get the current text content
-        const descriptionText = descriptionElement.textContent;
-        
-        // Check if the description has more than 40 characters
-        if (descriptionText.length > 40) {
-            // Truncate the description and add "..."
-            const truncatedText = descriptionText.substring(0, 40) + "...";
-            // Update the element's text content
-            descriptionElement.textContent = truncatedText;
-        }
-    }
 
-    // Call the function on page load
-    truncateDescription(); 
-</script>
