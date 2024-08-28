@@ -177,5 +177,11 @@ namespace MySoko.Models
         {
             return _context.Product.Any(e => e.ProductId == id);
         }
+
+        //GET /MarketPlace
+        public async Task<IActionResult> MarketPlace()
+        {
+            return View(await _context.Product.ToListAsync());
+        }
     }
 }

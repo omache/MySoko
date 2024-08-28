@@ -1,0 +1,26 @@
+﻿@model IEnumerable<MySoko.Models.Product>
+
+@{
+    ViewData["Title"] = "Market Place";
+}
+
+<div class="container">
+    <div class="row">
+@foreach (var item in Model)
+{
+
+        <!-- Card 1 -->
+        <div class="col-md-2">
+            <div class="card">
+                    <img class="card-img-top" src="@Url.Action("GetImage", new { id = item.ProductId })" alt="Product Image"/>
+                <div class="card-body">
+                    <h6 class="card-title">@item.Price</h6>
+                    <p class="card-text">@item.Description</p>
+                    <a href="#" class="btn btn-outline-primary btn-sm">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+
+}
+        </div>
+    </div>
