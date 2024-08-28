@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <h6 class="card-title">@item.Price</h6>
                     <p class="card-text">@item.Description</p>
-                    <a href="#" class="btn btn-outline-primary btn-sm">Add to Cart</a>
+                    <button class="btn btn-outline-primary btn-sm add-to-cart" onclick="addToCart(productId: , price: ,)">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -24,3 +24,81 @@
 }
         </div>
     </div>
+<div id="cart" class="card-cart">
+    <div class="card-body">
+        <strong><h5>Cart</h5></strong>
+        <table id="cart-items">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                    <th>Delete</th>
+                    </tr>
+            </thead>
+            <tbody>
+                <!-- Cart items will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+    <div class="card-cart-footer">
+        <strong>Total: $<span id="cart-total">0</span></strong>
+    </div>
+</div>
+
+<script>
+let cart = [];
+function addToCart(productName, price) {
+    const existingItem = cart.find(item => item.product === productName);
+    if (existingItem) {
+        existingItem.quantity += 1;
+        existingItem.total = existingItem.quantity * existingItem.price;
+        } 
+        else {
+            cart.push({ product: productName, quantity: 1, price: price, total: price });
+            }
+            renderCart();
+        }
+        
+function removeFromCart(productName) {
+    const item = cart.find(item => item.product === productName);
+    if (item) {
+                if (item.quantity > 1) {
+                    item.quantity -= 1;
+                    item.total = item.quantity * item.price;
+                } else {
+                    cart = cart.filter(item => item.product !== productName);
+                }
+            }
+
+            renderCart();
+        }
+
+        function renderCart() {
+            const cartElement = document.getElementById('cart');
+            const cartItemsElement = document.getElementById('cart-items').getElementsByTagName('tbody')[0];
+            const cartTotalElement = document.getElementById('cart-total');
+            
+            if (cart.length > 0) {
+                cartElement.style.display = 'block';
+            } else {
+                cartElement.style.display = 'none';
+            }
+
+            cartItemsElement.innerHTML = ''; // Clear previous items
+
+            let totalCost = 0;
+            cart.forEach(item => {
+                totalCost += item.total;
+
+                const row = cartItemsElement.insertRow();
+                row.insertCell(0).textContent = item.product;
+                row.insertCell(1).textContent = item.quantity;
+                row.insertCell(2).textContent = `$${item.total.toFixed(2)}`;
+                const deleteCell = row.insertCell(3);
+                deleteCell.innerHTML = `<button type="button" class="btn btn-danger btn-sm" onclick="removeFromCart('${item.product}')">Remove</button>`;
+            });
+
+            cartTotalElement.textContent = totalCost.toFixed(2);
+        }
+</script>
