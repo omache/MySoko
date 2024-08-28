@@ -49,7 +49,7 @@
 <script>
 let cart = [];
 function addToCart(productId, price) {
-    const existingItem = cart.find(item => item.product === productName);
+    const existingItem = cart.find(item => item.product === productId);
     if (existingItem) {
         existingItem.quantity += 1;
         existingItem.total = existingItem.quantity * existingItem.price;
