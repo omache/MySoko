@@ -1,4 +1,13 @@
-﻿let cart = [];
+﻿let cart = loadCartFromLocalStorage();
+
+function loadCartFromLocalStorage() {
+  const cartData = localStorage.getItem("cart");
+  return cartData ? JSON.parse(cartData) : [];
+}
+
+function saveCartToLocalStorage() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
 
 function addToCart(productName, price) {
   const existingItem = cart.find((item) => item.product === productName);
@@ -13,6 +22,7 @@ function addToCart(productName, price) {
       total: price,
     });
   }
+  saveCartToLocalStorage();
   renderCart();
 }
 
@@ -26,11 +36,13 @@ function removeFromCart(productName) {
       cart = cart.filter((item) => item.product !== productName);
     }
   }
+  saveCartToLocalStorage();
   renderCart();
 }
 
 function clearCart() {
   cart = [];
+  saveCartToLocalStorage();
   renderCart();
 }
 
@@ -54,17 +66,6 @@ function renderCart() {
 
   cartItemsElement.innerHTML = ""; // Clear previous items
 
-  // Function to format a number as Ksh
-  function formatAsKsh(amount) {
-    const formatter = new Intl.NumberFormat("en-KE", {
-      style: "currency",
-      currency: "KES",
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
-    return formatter.format(amount);
-  }
-
   let totalCost = 0;
   cart.forEach((item) => {
     totalCost += item.total;
@@ -72,13 +73,17 @@ function renderCart() {
     const row = cartItemsElement.insertRow();
     row.insertCell(0).textContent = item.product;
     row.insertCell(1).textContent = item.quantity;
-    row.insertCell(2).textContent = `Ksh${item.total.toLocaleString({
+    row.insertCell(2).textContent = `KSh ${item.total.toLocaleString({
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     })}`;
     const deleteCell = row.insertCell(3);
-    deleteCell.innerHTML = `<button type="button" class="btn btn-danger btn-sm" onclick="removeFromCart('${item.product}')">Remove</button>`;
+    deleteCell.innerHTML = `<a type="button" onclick="removeFromCart('${item.product}')"><i class="fa-solid fa-trash fa-bounce" style="color:red"></i></a>`;
   });
 
   cartTotalElement.textContent = totalCost.toLocaleString();
 }
+
+window.onload = function () {
+  renderCart();
+};
