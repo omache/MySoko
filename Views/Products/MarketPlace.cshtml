@@ -5,36 +5,61 @@
 }
 
 
-    <div class="d-flex justify-content-between align-items-center mb-2">
-        
-        <form asp-controller="Products" asp-action="MarketPlace" class="d-flex">
-            <input type="text" name="searchString" class="form-control border-1 border-secondary me-2"
-                placeholder="Search Product" />
-            <input type="submit" value="Search" class="btn btn-outline-secondary" />
-        </form>
-        <i class="fa-solid fa-cart-shopping fa-3x float-end"></i>
-    </div>
+<div class="d-flex justify-content-between align-items-center mb-2">
+
+    <form asp-controller="Products" asp-action="MarketPlace" class="d-flex">
+        <input type="text" name="searchString" class="form-control border-1 border-secondary me-2"
+            placeholder="Search Product" />
+        <input type="submit" value="Search" class="btn btn-outline-secondary" />
+    </form>
+    <i class="fa-solid fa-cart-shopping fa-3x float-end"></i>
+</div>
 
 <div class="container">
-<div class="row">
-@foreach (var item in Model)
-{
-
-        <!-- Card 1 -->
-        <div class="col-md-2">
-            <div class="card">
-                    <img class="card-img-top" src="@Url.Action("GetImage", new { id = item.ProductId })" alt="Product Image"/>
-                <div class="card-body">
-                    <h6 class="card-title"> @Html.DisplayFor(modelItem => item.Price)</h6>
-                    <p id="itemDescription" class="card-text">@item.Description</p>
-                    <a href="#" class="btn btn-outline-primary btn-sm">Add to Cart</a>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-2">
+                <div class="card">
+                    <img class="card-img-top" src="@Url.Action("GetImage", new { id = item.ProductId })"
+                        alt="Product Image" />
+                    <div class="card-body">
+                        <h6 class="card-title"> @Html.DisplayFor(modelItem => item.Price)</h6>
+                        <p id="itemDescription" class="card-text">@item.Description</p>
+                        <button class="btn btn-outline-primary btn-sm add-to-cart"
+                            onclick="addToCart('@item.Name', @item.Price)">Add to Cart</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-}
- </div>
+        }
     </div>
+</div>
 
-
-
+<div id="cart" class="card-cart"
+    style="display: none; position: fixed; top: 15%; right: 0%; width: 300px; z-index: 1000; background-color:  #fff0f5; border-radius: 5px;;">
+    <div class="card-body">
+        <i class="fa-solid fa-cart-shopping fa-2x float-end"></i>
+        <table id="cart-items" class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Amount</th>
+                    <th>Del</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Cart items will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+    <div class="card-cart-footer"
+        style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+        <div>
+            <button class="btn btn-outline-danger btn-sm" onclick="clearCart()">Clear</button>
+            <button class="btn btn-outline-success btn-sm" onclick="checkoutCart()">Checkout</button>
+        </div>
+        <strong>Total: Ksh<span id="cart-total" style="color:blue">0.00</span></strong>
+    </div>
+</div>
