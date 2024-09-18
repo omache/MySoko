@@ -35,8 +35,7 @@ env:
   ECR_REPOSITORY: mysoko           # set this to your Amazon ECR repository name
   ECS_SERVICE: mysokoApp                 # set this to your Amazon ECS service name
   ECS_CLUSTER: mySokoAppService                 # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: https://us-east-1.console.aws.amazon.com/ecs/v2/task-definitions/mySokoDefinition/1/json?region=us-east-1   # set this to the path to your Amazon ECS task definition
-                                               # file, e.g. .aws/task-definition.json
+  ECS_TASK_DEFINITION: arn:aws:ecs:us-east-1:920373031141:task-definition/mySokoDefinition:1
   CONTAINER_NAME: mySokoContainer           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
 
