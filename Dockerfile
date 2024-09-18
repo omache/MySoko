@@ -16,7 +16,7 @@ COPY . ./
 RUN dotnet publish -c Release -o /out
 
 # Stage 2: Create the runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
 # Set the working directory in the container to /app
 WORKDIR /app
