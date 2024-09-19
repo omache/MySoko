@@ -15,7 +15,16 @@
                 }
             ],
             "essential": true,
-            "environment": [],
+            "environment": [
+                {
+                    "name": "Authentication:Google:ClientId",
+                    "value": "965831626948-kjn9i3hbeggdagugl4slbk9lnfn7kcnd.apps.googleusercontent.com"
+                },
+                {
+                    "name": "Authentication:Google:ClientSecret",
+                    "value": "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"
+                }
+            ],
             "environmentFiles": [],
             "mountPoints": [],
             "volumesFrom": [],
