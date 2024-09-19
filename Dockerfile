@@ -15,8 +15,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
 COPY --from=build /out ./
-COPY entrypoint.sh ./
 
 EXPOSE 80
 
-ENTRYPOINT ["./entrypoint.sh"]
+# Apply database migrations and then start the application
+ENTRYPOINT ["sh", "-c", "dotnet MySoko.dll & dotnet ef database update --project YourProject.csproj --startup-project YourStartupProject.csproj"]
