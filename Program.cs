@@ -16,7 +16,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-// Configure Services for Google Signup and Login Management
+/// Configure Services for Google Signup and Login Management
 builder.Services.AddAuthentication()
     .AddGoogle(googleOptions =>
     {
