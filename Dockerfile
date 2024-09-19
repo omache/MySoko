@@ -1,16 +1,15 @@
 # Stage 1: Build the application
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
-
 # Set the working directory in the container to /app
 WORKDIR /app
 
 # Copy the csproj file(s) and restore the NuGet packages
-COPY *.csproj ./
+COPY *.csproj ./  
 RUN dotnet restore
 
 # Copy the rest of the application files
-COPY . ./
+COPY . ./  
 
 # Build the application
 RUN dotnet publish -c Release -o /out
@@ -29,3 +28,7 @@ EXPOSE 80
 
 # Set the entrypoint for the container to run the application
 ENTRYPOINT ["dotnet", "MySoko.dll"]
+
+# Optional: Run migrations when the container starts (ensure you have EF Core CLI tools installed in your project)
+# ENV ASPNETCORE_ENVIRONMENT=Production
+# ENTRYPOINT ["dotnet", "MySoko.dll", "ef", "database", "update"]
