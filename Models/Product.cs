@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace MySoko.Models
 {
@@ -11,12 +12,12 @@ namespace MySoko.Models
         public string? Category { get; set; }
 
         // Pricing and Inventory
+        [Display(Name = "Price (KSh)")]
         [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = false)]
         public decimal Price { get; set; }
+
         [Display(Name = "Stock Quantity")]
         public int? StockQuantity { get; set; }
         public byte[]? ItemPhoto { get; set; }
     }
-
-
 }

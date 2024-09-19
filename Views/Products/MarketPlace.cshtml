@@ -1,19 +1,11 @@
-﻿@model IEnumerable<MySoko.Models.Product>
+﻿@using System.Globalization
+
+@model IEnumerable<MySoko.Models.Product>
 
 @{
     ViewData["Title"] = "Market Place";
+    var kenyanCulture = new CultureInfo("sw-KE"); // Kenyan currency culture
 }
-
-
-<div class="d-flex justify-content-between align-items-center mb-2">
-
-    <form asp-controller="Products" asp-action="MarketPlace" class="d-flex">
-        <input type="text" name="searchString" class="form-control border-1 border-secondary me-2"
-            placeholder="Search Product" />
-        <input type="submit" value="Search" class="btn btn-outline-secondary" />
-    </form>
-
-</div>
 
 <div class="container">
     <div class="row">
@@ -21,20 +13,23 @@
         {
             <div class="col-md-2">
                 <div class="card">
-                    <img class="card-img-top" src="@Url.Action("GetImage", new { id = item.ProductId })"
-                        alt="Product Image" />
+                    <img class="card-img-top" src="@Url.Action("GetImage", new { id = item.ProductId })" alt="Product Image" />
                     <div class="card-body">
-                        <h6 class="card-title"> @Html.DisplayFor(modelItem => item.Price)</h6>
+                        <h6 class="card-title">
+                            @item.Price.ToString("C", kenyanCulture) <!-- Format as KSh -->
+                        </h6>
                         <p id="itemDescription" class="card-text">@item.Description</p>
                         <button class="btn btn-outline-primary btn-sm add-to-cart"
-                            onclick="addToCart('@item.Name', @item.Price)">Add to Cart</button>
+                                onclick="addToCart('@item.Name', @item.Price)">
+                            Add to Cart
+                        </button>
                     </div>
                 </div>
             </div>
-
         }
     </div>
 </div>
+
 
 <div id="cart" class="card-cart"
     style="display: none; position: fixed; top: 15%; right: 0%; width: 300px; z-index: 1000; background-color:  #fff0f5; border-radius: 5px;;">
@@ -56,9 +51,42 @@
     <div class="card-cart-footer"
         style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
         <div>
-            <button class="btn btn-outline-danger btn-sm" onclick="clearCart()">Clear</button>
-            <button class="btn btn-outline-success btn-sm" onclick="checkoutCart()">Checkout</button>
+            <button class="btn btn-danger btn-sm" onclick="clearCart()">Clear</button>
+            <button class="btn btn-success btn-sm" onclick="checkoutCart()">Checkout</button>
+
         </div>
-        <strong style="color: BLUE;">Total: Ksh <span id="cart-total" style="color:BLUE">0.00</span></strong>
+        <strong style="color: BLUE;">Total: <span id="cart-total" style="color:BLUE">0.00</span></strong>
+    </div>
+</div>
+<!-- Checkout Summary Modal -->
+<div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="checkoutModalLabel">Cart Summary</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modal-cart-items">
+                        <!-- Cart items will be inserted here -->
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-end">
+                    <strong>Total: KSh <span id="modal-cart-total">0.00</span></strong>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Proceed to Payment</button>
+            </div>
+        </div>
     </div>
 </div>

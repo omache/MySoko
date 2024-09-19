@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MySoko.Data;
 
@@ -11,9 +12,11 @@ using MySoko.Data;
 namespace MySoko.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240919094323_MigrationName")]
+    partial class MigrationName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,9 +249,6 @@ namespace MySoko.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Category")
                         .HasColumnType("nvarchar(max)");
 
@@ -268,8 +268,6 @@ namespace MySoko.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ProductId");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Product");
                 });
@@ -323,18 +321,6 @@ namespace MySoko.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("MySoko.Models.Product", b =>
-                {
-                    b.HasOne("MySoko.Data.ApplicationUser", null)
-                        .WithMany("PurchaseHistory")
-                        .HasForeignKey("ApplicationUserId");
-                });
-
-            modelBuilder.Entity("MySoko.Data.ApplicationUser", b =>
-                {
-                    b.Navigation("PurchaseHistory");
                 });
 #pragma warning restore 612, 618
         }
