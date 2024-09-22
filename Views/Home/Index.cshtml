@@ -1,8 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    var username = User.Identity?.Name ?? "Anonymous"; // Set default to "Anonymous"
+    var firstName = ViewBag.FirstName ?? "Anonymous"; // Set default to "Anonymous"
     var isReadOnly = User.Identity.IsAuthenticated ? "" : "readonly"; // Check if authenticated
-    var firstName = ViewBag.FirstName;
+    
 
 
 }
@@ -39,10 +39,12 @@
         <div class="messages" id="messagesList">
             <!-- Messages will be dynamically added here -->
         </div>
+        <form>
         <div class="input-container">
             <input type="hidden" id="userInput" value="@firstName" />
-            <input type="text" id="messageInput" class="message-input" placeholder="Type a message..." />
+            <input type="text" autocomplete="off" id="messageInput" class="message-input" placeholder="Type a message..." />
             <button id="sendButton" class="send-btn"><i class="fa fa-paper-plane"></i></button>
+            </form>
         </div>
     </div>
 </div>

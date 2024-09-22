@@ -31,4 +31,4 @@ document.getElementById("sendButton").addEventListener("click", function (event)
 document.getElementById("chatHeader").addEventListener("click", function() {
     var chatBox = document.getElementById("chatBox");
     chatBox.classList.toggle("hidden");
-});
+}); 
