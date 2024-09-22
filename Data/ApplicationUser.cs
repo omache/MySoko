@@ -9,14 +9,8 @@ namespace MySoko.Data
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public byte[]? ProfilePhoto { get; set; }
-        public Roles? UserRoles { get; set; } = Roles.Customer;
+        public string? UserRoles { get; set; } = "Customer";
         public List<Product>? PurchaseHistory { get; set; }
     }
 
-    public enum Roles
-    {
-        Admin,
-        Merchant,
-        Customer
-    }
 }
