@@ -1,6 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var username = User.Identity?.Name ?? "Anonymous"; // Set default to "Anonymous"
+    var isReadOnly = User.Identity.IsAuthenticated ? "" : "readonly"; // Check if authenticated
 }
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
@@ -24,3 +27,23 @@
         </div>
     </div>
 </div>
+
+<div class="chat-container">
+    <div class="chat-header" id="chatHeader">
+        <i class="fa fa-comments" aria-hidden="true"></i> Chat
+    </div>
+    <div class="chat-box" id="chatBox">
+        <div class="messages" id="messagesList">
+            <!-- Messages will be dynamically added here -->
+        </div>
+        <div class="input-container">
+            <input type="hidden" id="userInput" value="@username" />
+            <input type="text" id="messageInput" class="message-input" placeholder="Type a message..." />
+            <button id="sendButton" class="send-btn"><i class="fa fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>

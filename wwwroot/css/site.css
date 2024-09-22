@@ -68,3 +68,94 @@ body {
 .cart-total {
   color: blue;
 }
+
+.chat-container {
+  position: fixed;
+  bottom: 60px; /* Adjusted to be above the footer */
+  right: 20px;
+  width: 300px;
+  font-family: Arial, sans-serif;
+  z-index: 1000; /* Ensures it appears above other content */
+}
+
+.chat-header {
+  background-color: #128C7E;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 10px 10px 0 0;
+}
+
+.chat-header i {
+  margin-right: 8px;
+}
+
+.chat-box {
+  background-color: #fff;
+  border: 1px solid #128C7E;
+  border-radius: 0 0 10px 10px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.chat-box.hidden {
+  display: none;
+}
+
+.messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  max-height: 300px;
+  border-bottom: 1px solid #ccc;
+}
+
+#messagesList li {
+  list-style: none;
+  margin-bottom: 10px;
+  background-color: #ece5dd;
+  padding: 5px;
+  border-radius: 5px;
+  word-wrap: break-word;
+}
+
+.input-container {
+  display: flex;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 0 0 10px 10px;
+}
+
+.message-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+}
+
+.send-btn {
+  background-color: #128C7E;
+  color: white;
+  border: none;
+  margin-left: 10px;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.send-btn i {
+  font-size: 16px;
+}
+
+.send-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.username {
+  color: maroon;
+  font-size: 11px; /* Adjust size as needed */
+}
