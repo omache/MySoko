@@ -75,12 +75,4 @@
 - **User Behavior Tracking:** Track user interactions and behavior on the site.
 - **Sales Analytics:** Monitor sales trends and performance metrics.
 
-### 14. **Accessibility**
-
-- **Accessibility Features:** Ensure the site is accessible to users with disabilities, including screen reader compatibility and keyboard navigation.
-
-Implementing these features will help you create a robust and user-friendly e-commerce website using ASP.NET.
-
-dotnet user-secrets set "Authentication:Google:ClientId" "965831626948-kjn9i3hbeggdagugl4slbk9lnfn7kcnd.apps.googleusercontent.com
-"
-dotnet user-secrets set "Authentication:Google:ClientSecret" "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"
+  
